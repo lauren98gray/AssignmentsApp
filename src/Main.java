@@ -1,5 +1,7 @@
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
 public class Main {
@@ -26,6 +28,19 @@ public class Main {
         // Output the day of the week that you were born
         DayOfWeek birthday = birthdate.getDayOfWeek();
         System.out.println("I was born on a " + birthday);
+
+        // Output the number of days you've been alive
+        long numDaysSince = getNumDaysSince(birthdate, current);
+        System.out.println("I have been alive for " + numDaysSince + " days.");
+    }
+
+    private static long getNumDaysSince(LocalDateTime earlierDate, LocalDateTime mostRecentDate) {
+        LocalDate earlierToLD = earlierDate.toLocalDate();
+        LocalDate recentToLD = mostRecentDate.toLocalDate();
+        long earlierSinceEpoch = earlierToLD.toEpochDay();
+        long recentSinceEpoch = recentToLD.toEpochDay();
+        long numDaysSince = recentSinceEpoch - earlierSinceEpoch;
+        return numDaysSince;
     }
 
     private static String formatTomorrow(LocalDateTime today) {
