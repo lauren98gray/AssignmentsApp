@@ -14,6 +14,10 @@ public class Main {
         // Output tomorrow's date using a formatter
         String formattedTomorrow = formatTomorrow(current);
         System.out.println("Tomorrow's date is " + formattedTomorrow);
+
+        // Add 5 weeks to today's LocalDateTime
+        LocalDateTime fiveWeeksAdded = current.plusWeeks(5);
+        System.out.println("Today's date plus 5 weeks is " + fiveWeeksAdded);
     }
 
     private static String formatTomorrow(LocalDateTime today) {
