@@ -30,8 +30,12 @@ public class Main {
         System.out.println("I was born on a " + birthday);
 
         // Output the number of days you've been alive
-        long numDaysSince = getNumDaysSince(birthdate, current);
-        System.out.println("I have been alive for " + numDaysSince + " days.");
+        long numDaysAlive = getNumDaysSince(birthdate, current);
+        System.out.println("I have been alive for " + numDaysAlive + " days.");
+
+        // Output the number of days between two dates
+        long numDaysBetween = getNumDaysSince(current, fiveWeeksAdded);
+        System.out.println("There are " + numDaysBetween + " days between " + current + " and " + fiveWeeksAdded + ".");
     }
 
     private static long getNumDaysSince(LocalDateTime earlierDate, LocalDateTime mostRecentDate) {
