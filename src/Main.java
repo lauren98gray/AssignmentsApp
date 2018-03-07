@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Main {
 
@@ -27,24 +28,54 @@ public class Main {
 
         // Output the day of the week that you were born
         DayOfWeek birthday = birthdate.getDayOfWeek();
-        System.out.println("I was born on a " + birthday);
+        System.out.println("\nI was born on a " + birthday);
 
         // Output the number of days you've been alive
-        long numDaysAlive = getNumDaysSince(birthdate, current);
+        long numDaysAlive = ChronoUnit.DAYS.between(birthdate, current);
         System.out.println("I have been alive for " + numDaysAlive + " days.");
 
         // Output the number of days between two dates
-        long numDaysBetween = getNumDaysSince(current, fiveWeeksAdded);
-        System.out.println("There are " + numDaysBetween + " days between " + current + " and " + fiveWeeksAdded + ".");
+        long numDaysBetween = ChronoUnit.DAYS.between(current, fiveWeeksAdded);
+        System.out.println("\nThere are " + numDaysBetween + " days between " + current + " and " + fiveWeeksAdded + ".");
+
+        // Given two dates, output the earlier
+        // not sure if meant to use each of the suggestions or just choose one. just in case, I'm doing them all
+            //using isBefore method
+            LocalDateTime earlyDateWithIsBefore = findEarlierDateWithIsBefore(current, fiveWeeksAdded);
+            System.out.println("\nEarlier date using isBefore method: " + earlyDateWithIsBefore);
+            //using isAfter method
+            LocalDateTime earlyDateWithIsAfter = findEarlierDateWithIsAfter(current, fiveWeeksAdded);
+            System.out.println("Earlier date using isAfter method: " + earlyDateWithIsAfter);
+            //using compareTo
+            LocalDateTime earlyDateWithCompareTo = findEarlierDateWithCompareTo(current, fiveWeeksAdded);
+            System.out.println("Earlier date using compareTo method: " + earlyDateWithCompareTo);
+
     }
 
-    private static long getNumDaysSince(LocalDateTime earlierDate, LocalDateTime mostRecentDate) {
-        LocalDate earlierToLD = earlierDate.toLocalDate();
-        LocalDate recentToLD = mostRecentDate.toLocalDate();
-        long earlierSinceEpoch = earlierToLD.toEpochDay();
-        long recentSinceEpoch = recentToLD.toEpochDay();
-        long numDaysSince = recentSinceEpoch - earlierSinceEpoch;
-        return numDaysSince;
+    private static LocalDateTime findEarlierDateWithCompareTo(LocalDateTime date1, LocalDateTime date2) {
+        if (date1.compareTo(date2) < 0){
+            return date1;
+        }else if (date1.compareTo(date2) > 0){
+            return date2;
+        }else {
+            return null;
+        }
+    }
+
+    private static LocalDateTime findEarlierDateWithIsAfter(LocalDateTime date1, LocalDateTime date2) {
+        if (date1.isAfter(date2)) {
+            return date2;
+        }else {
+            return date1;
+        }
+    }
+
+    private static LocalDateTime findEarlierDateWithIsBefore(LocalDateTime date1, LocalDateTime date2) {
+        if (date1.isBefore(date2)){
+            return date1;
+        }else {
+            return date2;
+        }
     }
 
     private static String formatTomorrow(LocalDateTime today) {
