@@ -67,7 +67,9 @@ public class Main {
         int numDuplicates = countNumDuplicates(dataInFile);
         System.out.println("\nThere are " + numDuplicates + " duplicates in this file.");
 
-        //TODO Sort the dates in chronological order
+        //Sort the dates in chronological order
+        Collections.sort(dataInFile);
+        System.out.println("\nDates in chronological order: " + dataInFile);
 
         //TODO Count the number of duplicates in a sorted list without using a Java Set
 
