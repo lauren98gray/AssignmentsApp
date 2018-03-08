@@ -7,9 +7,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -65,7 +63,9 @@ public class Main {
         int numDatesCurrentYear = countNumDatesInYear(dataInFile, current.getYear());
         System.out.println("There are " + numDatesCurrentYear + " stored dates in the current year.");
 
-        //TODO Count the number of duplicates
+        //Count the number of duplicates
+        int numDuplicates = countNumDuplicates(dataInFile);
+        System.out.println("\nThere are " + numDuplicates + " duplicates in this file.");
 
         //TODO Sort the dates in chronological order
 
@@ -82,6 +82,15 @@ public class Main {
         //TODO Output a date in the format "January 1st, 2018"
 
 
+    }
+
+    private static int countNumDuplicates(ArrayList<LocalDateTime> dataInFile) {
+        Set<LocalDateTime> distinctDates = new HashSet<>();
+        for (LocalDateTime date : dataInFile){
+            distinctDates.add(date);
+        }
+        int count = dataInFile.size() - distinctDates.size();
+        return count;
     }
 
     private static int countNumDatesInYear(ArrayList<LocalDateTime> dataInFile, int yearFormatyyyy) {
