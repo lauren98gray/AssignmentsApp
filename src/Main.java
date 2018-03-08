@@ -79,7 +79,11 @@ public class Main {
         int numEveningDates = countEveningDates(dataInFile, 6);
         System.out.println("\nThere are " + numEveningDates + " evening dates in this file.");
 
-        //TODO Count the number of dates in each individual 12 months without using a Java Map
+        //Count the number of dates in each individual 12 months without using a Java Map
+        ArrayList<String> numDatesInMonth = countNumDatesInMonth(dataInFile);
+        System.out.println("\nArrayList of number of dates in each month: " + numDatesInMonth);
+
+        //TODO Count the number of dates in each individual 12 months using a Java Map
 
         //TODO Determine the index of the latest LocalDateTime
 
@@ -88,6 +92,23 @@ public class Main {
         //TODO Output a date in the format "January 1st, 2018"
 
 
+    }
+
+    private static ArrayList<String> countNumDatesInMonth(ArrayList<LocalDateTime> dataInFile) {
+        ArrayList<String> numDatesEachMonth = new ArrayList<>();
+        ArrayList<Integer> counts = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            counts.add(0);
+        }
+        for (LocalDateTime date : dataInFile){
+            int currentValue = counts.get(date.getMonthValue()-1);
+            currentValue++;
+            counts.set((date.getMonthValue())-1, currentValue);
+        }
+        for (int i = 0; i < counts.size(); i++) {
+            numDatesEachMonth.add("Month " + (i+1) + ": " + counts.get(i) + " dates");
+        }
+        return numDatesEachMonth;
     }
 
     private static int countEveningDates(ArrayList<LocalDateTime> dataInFile, int hour) {
