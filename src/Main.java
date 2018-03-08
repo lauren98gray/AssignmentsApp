@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -80,10 +81,12 @@ public class Main {
         System.out.println("\nThere are " + numEveningDates + " evening dates in this file.");
 
         //Count the number of dates in each individual 12 months without using a Java Map
-        ArrayList<String> numDatesInMonth = countNumDatesInMonth(dataInFile);
+        ArrayList<Integer> numDatesInMonth = countNumDatesInMonth(dataInFile);
         System.out.println("\nArrayList of number of dates in each month: " + numDatesInMonth);
 
-        //TODO Count the number of dates in each individual 12 months using a Java Map
+        //Count the number of dates in each individual 12 months using a Java Map
+        Map<Integer, Integer> numDatesInMonthMap = countDatesInMonthMap(dataInFile);
+        System.out.println("Map of number of dates in each month: " + numDatesInMonthMap);
 
         //TODO Determine the index of the latest LocalDateTime
 
@@ -94,8 +97,16 @@ public class Main {
 
     }
 
-    private static ArrayList<String> countNumDatesInMonth(ArrayList<LocalDateTime> dataInFile) {
-        ArrayList<String> numDatesEachMonth = new ArrayList<>();
+    private static Map<Integer, Integer> countDatesInMonthMap(ArrayList<LocalDateTime> dataInFile) {
+        Map<Integer, Integer> answer = new HashMap<>();
+        ArrayList<Integer> counts = countNumDatesInMonth(dataInFile);
+        for (int i = 0; i < counts.size(); i++) {
+            answer.put(i+1, counts.get(i));
+        }
+        return answer;
+    }
+
+    private static ArrayList<Integer> countNumDatesInMonth(ArrayList<LocalDateTime> dataInFile) {
         ArrayList<Integer> counts = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             counts.add(0);
@@ -105,10 +116,7 @@ public class Main {
             currentValue++;
             counts.set((date.getMonthValue())-1, currentValue);
         }
-        for (int i = 0; i < counts.size(); i++) {
-            numDatesEachMonth.add("Month " + (i+1) + ": " + counts.get(i) + " dates");
-        }
-        return numDatesEachMonth;
+        return counts;
     }
 
     private static int countEveningDates(ArrayList<LocalDateTime> dataInFile, int hour) {
