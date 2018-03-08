@@ -61,7 +61,9 @@ public class Main {
         int numDatesinYear = countNumDatesInYear(dataInFile, year);
         System.out.println("\nThere are " + numDatesinYear + " stored dates in the year " + year + ".");
 
-        //TODO Count the number of stored dates in the current year
+        //Count the number of stored dates in the current year
+        int numDatesCurrentYear = countNumDatesInYear(dataInFile, current.getYear());
+        System.out.println("There are " + numDatesCurrentYear + " stored dates in the current year.");
 
         //TODO Count the number of duplicates
 
