@@ -56,7 +56,40 @@ public class Main {
         ArrayList<LocalDateTime> dataInFile = createArrayListFromFileDate("randomDates.txt");
         System.out.println("\nArrayList of LocalDateTime objects in file: " + dataInFile);
 
+        //Output the number of stored dates in the year [Y]
+        int year = 2092;
+        int numDatesinYear = countNumDatesInYear(dataInFile, year);
+        System.out.println("\nThere are " + numDatesinYear + " stored dates in the year " + year + ".");
 
+        //TODO Count the number of stored dates in the current year
+
+        //TODO Count the number of duplicates
+
+        //TODO Sort the dates in chronological order
+
+        //TODO Count the number of duplicates in a sorted list without using a Java Set
+
+        //TODO Count the number of evening (after 6pm) dates
+
+        //TODO Count the number of dates in each individual 12 months without using a Java Map
+
+        //TODO Determine the index of the latest LocalDateTime
+
+        //TODO Determine the indexes of the elements that have the earliest starting time, regardless of date
+
+        //TODO Output a date in the format "January 1st, 2018"
+
+
+    }
+
+    private static int countNumDatesInYear(ArrayList<LocalDateTime> dataInFile, int yearFormatyyyy) {
+        int count = 0;
+        for (LocalDateTime date : dataInFile){
+            if (date.getYear() == yearFormatyyyy){
+                count++;
+            }
+        }
+        return count;
     }
 
     private static ArrayList<LocalDateTime> createArrayListFromFileDate(String fileName) throws FileNotFoundException {
