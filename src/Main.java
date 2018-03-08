@@ -75,7 +75,9 @@ public class Main {
         int numDuplicatesWithoutSet = countNumDuplicatesWithoutSet(dataInFile);
         System.out.println("\nThere are " + numDuplicatesWithoutSet + " duplicates in this file (without using a Set).");
 
-        //TODO Count the number of evening (after 6pm) dates
+        //Count the number of evening (after 6pm) dates
+        int numEveningDates = countEveningDates(dataInFile, 6);
+        System.out.println("\nThere are " + numEveningDates + " evening dates in this file.");
 
         //TODO Count the number of dates in each individual 12 months without using a Java Map
 
@@ -86,6 +88,16 @@ public class Main {
         //TODO Output a date in the format "January 1st, 2018"
 
 
+    }
+
+    private static int countEveningDates(ArrayList<LocalDateTime> dataInFile, int hour) {
+        int count = 0;
+        for (LocalDateTime date : dataInFile) {
+            if (date.getHour() >= hour){
+                count++;
+            }
+        }
+        return count;
     }
 
     private static int countNumDuplicatesWithoutSet(ArrayList<LocalDateTime> dataInFile) {
