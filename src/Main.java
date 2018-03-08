@@ -71,7 +71,9 @@ public class Main {
         Collections.sort(dataInFile);
         System.out.println("\nDates in chronological order: " + dataInFile);
 
-        //TODO Count the number of duplicates in a sorted list without using a Java Set
+        //Count the number of duplicates in a sorted list without using a Java Set
+        int numDuplicatesWithoutSet = countNumDuplicatesWithoutSet(dataInFile);
+        System.out.println("\nThere are " + numDuplicatesWithoutSet + " duplicates in this file (without using a Set).");
 
         //TODO Count the number of evening (after 6pm) dates
 
@@ -86,11 +88,36 @@ public class Main {
 
     }
 
+    private static int countNumDuplicatesWithoutSet(ArrayList<LocalDateTime> dataInFile) {
+        // this code works for any list
+        /*int count = 0;
+        ArrayList<LocalDateTime> datesCopy = new ArrayList<>();
+        for (LocalDateTime date : dataInFile){
+            if (datesCopy.contains(date)){
+                count++;
+            }
+            datesCopy.add(date);
+        }
+        return count;*/
+
+        //this code works specifically for a sorted list
+        int count = 0;
+        LocalDateTime dateBefore = dataInFile.get(0);
+        for (int i = 1; i < dataInFile.size(); i++) {
+            if (dataInFile.get(i).compareTo(dateBefore) == 0){
+                count++;
+            }
+            dateBefore = dataInFile.get(i);
+        }
+        return count;
+    }
+
     private static int countNumDuplicates(ArrayList<LocalDateTime> dataInFile) {
         Set<LocalDateTime> distinctDates = new HashSet<>();
         for (LocalDateTime date : dataInFile){
             distinctDates.add(date);
         }
+
         int count = dataInFile.size() - distinctDates.size();
         return count;
     }
