@@ -88,13 +88,26 @@ public class Main {
         Map<Integer, Integer> numDatesInMonthMap = countDatesInMonthMap(dataInFile);
         System.out.println("Map of number of dates in each month: " + numDatesInMonthMap);
 
-        //TODO Determine the index of the latest LocalDateTime
+        //Determine the index of the latest LocalDateTime
+        int indexMostRecent = findMostRecentDate(dataInFile);
+        System.out.println(indexMostRecent);
 
         //TODO Determine the indexes of the elements that have the earliest starting time, regardless of date
 
         //TODO Output a date in the format "January 1st, 2018"
 
 
+    }
+
+    private static int findMostRecentDate(ArrayList<LocalDateTime> dataInFile) {
+        int index = 0;
+        LocalDateTime current = LocalDateTime.now();
+        for (int i = 0; i < dataInFile.size(); i++) {
+            if (dataInFile.get(i).isBefore(current)){
+                index = i;
+            }
+        }
+        return index;
     }
 
     private static Map<Integer, Integer> countDatesInMonthMap(ArrayList<LocalDateTime> dataInFile) {
