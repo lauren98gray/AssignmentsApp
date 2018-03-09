@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -28,15 +27,15 @@ public class Main {
         LocalDateTime fiveWeeksAdded = current.plusWeeks(5);
         System.out.println("Today's date plus 5 weeks is " + fiveWeeksAdded);
 
-        // Initialize LocalDateTime object to your birthdate at 12:35PM
-        LocalDateTime birthdate = LocalDateTime.of(1998, 12, 3, 12, 35);
+        // Initialize LocalDateTime object to your birthDate at 12:35PM
+        LocalDateTime birthDate = LocalDateTime.of(1998, 12, 3, 12, 35);
 
         // Output the day of the week that you were born
-        DayOfWeek birthday = birthdate.getDayOfWeek();
+        DayOfWeek birthday = birthDate.getDayOfWeek();
         System.out.println("\nI was born on a " + birthday);
 
         // Output the number of days you've been alive
-        long numDaysAlive = ChronoUnit.DAYS.between(birthdate, current);
+        long numDaysAlive = ChronoUnit.DAYS.between(birthDate, current);
         System.out.println("I have been alive for " + numDaysAlive + " days.");
 
         // Output the number of days between two dates
@@ -57,8 +56,8 @@ public class Main {
 
         //Output the number of stored dates in the year [Y]
         int year = 2092;
-        int numDatesinYear = countNumDatesInYear(dataInFile, year);
-        System.out.println("\nThere are " + numDatesinYear + " stored dates in the year " + year + ".");
+        int numDatesInYear = countNumDatesInYear(dataInFile, year);
+        System.out.println("\nThere are " + numDatesInYear + " stored dates in the year " + year + ".");
 
         //Count the number of stored dates in the current year
         int numDatesCurrentYear = countNumDatesInYear(dataInFile, current.getYear());
@@ -94,11 +93,38 @@ public class Main {
 
         //Determine the indexes of the elements that have the earliest starting time, regardless of date
         ArrayList<Integer> indexEarlyStartTime = findEarliestTime(dataInFile);
-        System.out.println("The indexes of the elements that have the earliest starting time, regardless of date are: " + indexEarlyStartTime);
+        System.out.println("\nThe indexes of the elements that have the earliest starting time, regardless of date are: " + indexEarlyStartTime);
 
-        //TODO Output a date in the format "January 1st, 2018"
+        //Output a date in the format "January 1st, 2018"
+        String formattedDate = formatDate(current);
+        System.out.println("\nFormatted date: " + formattedDate);
 
+    }
 
+    private static String formatDate(LocalDateTime date) {
+        String month = String.valueOf(date.getMonth());
+        String monthFormat = month.substring(0,1)+ month.substring(1).toLowerCase();
+        int day = date.getDayOfMonth();
+        int year = date.getYear();
+        String formattedDate = monthFormat + " " + generateOrdinalNumSuffix(day) + ", " + year;
+        return formattedDate;
+    }
+
+    private static String generateOrdinalNumSuffix(int integer) {
+        String answer = "";
+        if (integer==1 || integer==21 || integer==31){
+            answer = integer + "st";
+        }
+        else if (integer==2 || integer==22) {
+            answer = integer + "nd";
+        }
+        else if (integer==3 || integer==23) {
+            answer = integer + "rd";
+        }
+        else {
+            answer = integer +"th";
+        }
+        return answer;
     }
 
     private static ArrayList<Integer> findEarliestTime(ArrayList<LocalDateTime> dataInFile) {
