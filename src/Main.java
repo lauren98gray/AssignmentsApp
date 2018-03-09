@@ -90,13 +90,33 @@ public class Main {
 
         //Determine the index of the latest LocalDateTime
         int indexMostRecent = findMostRecentDate(dataInFile);
-        System.out.println(indexMostRecent);
+        System.out.println("\nThe most recent date in the list is at this index: " + indexMostRecent);
 
-        //TODO Determine the indexes of the elements that have the earliest starting time, regardless of date
+        //Determine the indexes of the elements that have the earliest starting time, regardless of date
+        ArrayList<Integer> indexEarlyStartTime = findEarliestTime(dataInFile);
+        System.out.println("The indexes of the elements that have the earliest starting time, regardless of date are: " + indexEarlyStartTime);
 
         //TODO Output a date in the format "January 1st, 2018"
 
 
+    }
+
+    private static ArrayList<Integer> findEarliestTime(ArrayList<LocalDateTime> dataInFile) {
+        int indexEarliestTime = 0;
+        ArrayList<Integer> indexesEarliestTime = new ArrayList<>();
+        for (int i = 1; i < dataInFile.size(); i++) {
+            if (dataInFile.get(indexEarliestTime).getHour() > dataInFile.get(i).getHour()){
+                indexEarliestTime = i;
+            }else if (dataInFile.get(indexEarliestTime).getHour() == dataInFile.get(i).getHour()){
+                if (dataInFile.get(indexEarliestTime).getMinute() > dataInFile.get(i).getMinute()){
+                    indexEarliestTime = i;
+                }else if (dataInFile.get(indexEarliestTime).getMinute() == dataInFile.get(i).getMinute()){
+                    indexesEarliestTime.add(i);
+                }
+            }
+        }
+        indexesEarliestTime.add(indexEarliestTime);
+        return indexesEarliestTime;
     }
 
     private static int findMostRecentDate(ArrayList<LocalDateTime> dataInFile) {
