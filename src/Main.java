@@ -104,12 +104,12 @@ public class Main {
         System.out.println("\nToday is a " + today);
 
         //Define and use a Course enumerated type
-        Course firstClassMWF = Course.LINEARALGEBRA;
+        Course firstClassMWF = Course.LINEAR_ALGEBRA;
         System.out.println("\nMy first class on Mondays, Wednesdays, and Fridays is " + firstClassMWF);
-    }
 
-    public enum Course {
-        LINEARALGEBRA, DATASTRUCTURES, ENGINEERING, TENNIS, ENGLISH, FRESHMANSEMINAR
+        //Define and use a Category enumerated type
+        Category somethingToStudyFor = Category.FINAL_EXAM;
+        System.out.println("\nStudents should study for the " + somethingToStudyFor);
     }
 
     private static String formatDate(LocalDateTime date) {
@@ -304,3 +304,4 @@ public class Main {
         return formatDateTime;
     }
 }
+
