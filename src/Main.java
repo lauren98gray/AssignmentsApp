@@ -101,8 +101,15 @@ public class Main {
 
         //Define and use a DayOfWeek enumerated type
         DayOfWeek today = DayOfWeek.from(current);
-        System.out.println("Today is a " + today);
+        System.out.println("\nToday is a " + today);
 
+        //Define and use a Course enumerated type
+        Course firstClassMWF = Course.LINEARALGEBRA;
+        System.out.println("\nMy first class on Mondays, Wednesdays, and Fridays is " + firstClassMWF);
+    }
+
+    public enum Course {
+        LINEARALGEBRA, DATASTRUCTURES, ENGINEERING, TENNIS, ENGLISH, FRESHMANSEMINAR
     }
 
     private static String formatDate(LocalDateTime date) {
