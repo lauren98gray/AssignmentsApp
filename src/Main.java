@@ -99,6 +99,10 @@ public class Main {
         String formattedDate = formatDate(current);
         System.out.println("\nFormatted date: " + formattedDate);
 
+        //Define and use a DayOfWeek enumerated type
+        DayOfWeek today = DayOfWeek.from(current);
+        System.out.println("Today is a " + today);
+
     }
 
     private static String formatDate(LocalDateTime date) {
