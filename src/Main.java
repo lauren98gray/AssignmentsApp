@@ -1,5 +1,6 @@
 
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -110,6 +111,50 @@ public class Main {
         //Define and use a Category enumerated type
         Category somethingToStudyFor = Category.FINAL_EXAM;
         System.out.println("\nStudents should study for the " + somethingToStudyFor);
+
+        //Generate 2 random assignments named assign1 and assign2
+        Assignment assign1 = generateRandomAssignment();
+        Assignment assign2 = generateRandomAssignment();
+        System.out.println("\n1st Random Assignment: " + assign1);
+        System.out.println("\n2nd Random Assignment: " + assign2);
+        
+    }
+
+    private static Priority chooseRandomPriority() {
+        Random rand = new Random();
+        ArrayList<Priority> priorityLevels = new ArrayList<>();
+        for (Priority priority : Priority.values()){
+            priorityLevels.add(priority);
+        }
+        return priorityLevels.get(rand.nextInt(priorityLevels.size()));
+    }
+
+    private static Category chooseRandomCategory() {
+        Random rand = new Random();
+        ArrayList<Category> categories = new ArrayList<>();
+            for (Category category : Category.values()){
+                categories.add(category);
+            }
+            return categories.get(rand.nextInt(categories.size()));
+    }
+
+    private static Course chooseRandomCourse() {
+        Random rand = new Random();
+        ArrayList<Course> courses = new ArrayList<>();
+        for (Course course : Course.values()){
+            courses.add(course);
+        }
+        return courses.get(rand.nextInt(courses.size()));
+    }
+
+    private static Assignment generateRandomAssignment() {
+        Random rand = new Random();
+        LocalDateTime date = LocalDateTime.now().minusMinutes(rand.nextInt(131400));
+        Course course = chooseRandomCourse();
+        Category category = chooseRandomCategory();
+        Priority priority = chooseRandomPriority();
+        Assignment randomAssignment = new Assignment(date, course, category, priority);
+        return randomAssignment;
     }
 
     private static String formatDate(LocalDateTime date) {
