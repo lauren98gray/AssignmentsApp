@@ -122,10 +122,34 @@ public class Main {
         System.out.println("\nassign1 is equal to assign2. true or false? " + assign1.equals(assign2));
         System.out.println("assign1 is equal to assign3. true or false? " + assign1.equals(assign3));
 
-        //Override an Assignment.compareTo() method
+        //Create an Assignment.compareTo() method
         System.out.println("compare assign1 to assign2: " + assign1.compareTo(assign2));
         System.out.println("compare assign1 to assign3: " + assign1.compareTo(assign3));
 
+        //Which of assign1, assign2, or assign3 is the earliest?
+        ArrayList<Assignment> earliestAssignment = findEarliestAssignment(assign1, assign2, assign3);
+        System.out.println("\nearliest assignment: " + earliestAssignment);
+    }
+
+    private static ArrayList<Assignment> findEarliestAssignment(Assignment assign1, Assignment assign2, Assignment assign3) {
+        ArrayList<Assignment> assignments = new ArrayList<>();
+        assignments.add(assign1);
+        assignments.add(assign2);
+        assignments.add(assign3);
+        ArrayList<Assignment> answer = new ArrayList<>();
+        Assignment earliest = assignments.get(0);
+        for (Assignment assignment : assignments) {
+            if (assignment.getDate().isBefore(earliest.getDate())){
+                earliest = assignment;
+            }
+            // if two different assignments happen to have the same date, (and it's the earliest date) this will return a list of both assignments
+            // if one of the parameters passed is a copy of another (and it's the earliest), it'll only return that assignment once
+            else if (assignment.getDate().equals(earliest.getDate()) && !assignment.equals(earliest)){
+                answer.add(assignment);
+            }
+        }
+        answer.add(earliest);
+        return answer;
     }
 
     private static Priority chooseRandomPriority() {
