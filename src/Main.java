@@ -1,6 +1,3 @@
-
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -124,6 +121,10 @@ public class Main {
         //Override an Assignment.equals() method
         System.out.println("\nassign1 is equal to assign2. true or false? " + assign1.equals(assign2));
         System.out.println("assign1 is equal to assign3. true or false? " + assign1.equals(assign3));
+
+        //Override an Assignment.compareTo() method
+        System.out.println("compare assign1 to assign2: " + assign1.compareTo(assign2));
+        System.out.println("compare assign1 to assign3: " + assign1.compareTo(assign3));
 
     }
 

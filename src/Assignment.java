@@ -77,4 +77,16 @@ public class Assignment {
             return false;
         }
     }
+
+    public String compareTo(Assignment assignment){
+        if (this.date.isBefore(assignment.date)){
+            return "BEFORE";
+        }
+        else if (this.date.isAfter(assignment.date)){
+            return "AFTER";
+        }
+        else {
+            return "EQUALS";
+        }
+    }
 }
