@@ -63,4 +63,5 @@ public class Assignment {
                 "\ncategory: " + category +
                 "\npriorityLevel: " + priorityLevel;
     }
+
 }

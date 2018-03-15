@@ -117,7 +117,10 @@ public class Main {
         Assignment assign2 = generateRandomAssignment();
         System.out.println("\n1st Random Assignment: " + assign1);
         System.out.println("\n2nd Random Assignment: " + assign2);
-        
+
+        //Copy assign1 to assign3
+        Assignment assign3 = new Assignment(assign1.getDate(), assign1.getCourse(), assign1.getCategory(), assign1.getPriorityLevel());
+
     }
 
     private static Priority chooseRandomPriority() {
