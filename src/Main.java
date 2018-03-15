@@ -121,6 +121,10 @@ public class Main {
         //Copy assign1 to assign3
         Assignment assign3 = new Assignment(assign1.getDate(), assign1.getCourse(), assign1.getCategory(), assign1.getPriorityLevel());
 
+        //Override an Assignment.equals() method
+        System.out.println("\nassign1 is equal to assign2. true or false? " + assign1.equals(assign2));
+        System.out.println("assign1 is equal to assign3. true or false? " + assign1.equals(assign3));
+
     }
 
     private static Priority chooseRandomPriority() {

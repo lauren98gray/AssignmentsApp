@@ -64,4 +64,17 @@ public class Assignment {
                 "\npriorityLevel: " + priorityLevel;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Assignment assignment = (Assignment) obj;
+        if (this.date.equals(assignment.date) &&
+                this.course.equals(assignment.course) &&
+                this.category.equals(assignment.category) &&
+                this.priorityLevel.equals(assignment.priorityLevel)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
